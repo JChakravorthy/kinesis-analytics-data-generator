@@ -2,24 +2,24 @@
 
 Kinesis analytics is a way to analyze near real-time streams of data in a very SQL-like way.
 Anyone who knows regular SQL from using a database like Oracle say will have no trouble getting to grips with the 
-slightly unusual windowing features of Kinesis Analytics (or KA as I'll call it from now on). 
+slightly unusual in-application streams directives and windowing features of Kinesis Analytics (or KA as I'll call it from now on). 
 
-Testing KA apps just got a little bit easier with the introduction by Amazon recently of the Kinesis Data Generator (KDG)
+Testing KA apps just got a whole lot easier with the introduction by Amazon of the Kinesis Data Generator (KDG)
 utility. This is not be confused with the Kinesis Producer Library which is an API specification where you have to write code
 to send data to Kinesis streams. The Kinesis Data Generator is a web based utility that allows you define a template for test data 
 in pretty much any format you like - structured like JSON or CSV  or completely unstructued or semi-structured like 
-Apache log data format- and KDG can potentially send 1000's of test records per second into your chosen Kinesis Stream or Fire Hose 
-that correspond to the format defined in your schema. 
+Apache log data format - and KDG can potentially send 1000's of test records per second into your chosen Kinesis Stream or Fire Hose 
+in the format defined by your schema. 
 
 As KDG is a web-based utility and password protected you need to set up an AWS coginto user and specify login and password 
-credentials befire you can use it. Fortunately AWS make this really easy by using a pre-defined lambda and cloudformation template. 
+credentials before you can use it. Fortunately AWS make this really easy by using a pre-defined lambda and cloudformation template. 
 
 You can set up a cognito user by following this link 
 
 <https://awslabs.github.io/amazon-kinesis-data-generator/web/help.html#configAccount>
 
-Once you've uploaded a cognito JSON set-up file you will be presented with a screen where you only need to input a stack name and 
-your chosen username and password. You can choose all defaults and click NEXT to the rest of the screens/prompts and once the 
+Once you've uploaded a cognito JSON format set-up file you will be presented with a screen where you only need to input a stack 
+name and your chosen username and password. You can choose all defaults and click NEXT to the rest of the screens/prompts and once the 
 process has been completed you will be presented with a URL link which will take you to the Kinesis Data Generator web page itself. 
 From here you just need to type in your cognito login credentials and you can start to create a data feed schema and start 
 sending a ton of test data to your chosen Kinesis stream. The schema defintion can range from the very simple to  more complex 
