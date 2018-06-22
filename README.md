@@ -40,5 +40,13 @@ some KA SQL to run against your data input and optionally a source such as S3 to
 really simple, just a sliding windowing function that displays the average temperature per sensorID over the preceding moving 10 
 second window.
 
+As a recap you need to:
+
+1) Create a Kinesis FireHose to send your data into 
+2) Create a cognito user
+3) Create a dummy set of data using the Kinesis Data Generator to send data to your FireHose
+4) Create a Kinesis Analytics job, set the source as your FireHose and set up a SQL to analyze your data
+
+
 KA rocks!
 
