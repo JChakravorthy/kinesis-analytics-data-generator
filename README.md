@@ -17,10 +17,10 @@ your chosen username and password. You can choose all defaults and click NEXT to
 process has been completed you will be presented with a URL link which will take you to the Kinesis Data Generator web page itself. 
 From here you just need to type in your cognito login credentials and you can start to create a data feed schema and start 
 sending a ton of test data to your chosen Kinesis stream. The schema defintion can range from the very simple to  more complex 
-examples like apache log entries. You can even specify a schema where some data points can only take limited or randoam values.
-one shown belowbelow whereby you can specify certain limited or random values. In my own case I chose to create the following 
-schema to produce a set of dummy temperature data. As you can see the sensorId is a random value between 1 and 50, the temperature 
-must be between 10 and 150 and the status field can only take one of three values.
+examples like apache log entries. You can even specify a schema where some data points can only take a limited or random set
+of values. In my own case I chose to create the schema shown below to produce a set of dummy temperature data. This schema defines 
+a sensorId field that is a random value between 1 and 50, the currentTemperature field must lie between 10 and 150 and the 
+status field can only take one of three values.
 
 
 ```
@@ -48,17 +48,20 @@ My SQL was really simple, just a sliding windowing function that displays the av
 moving 10 second window. The SQL you create  is a little unusual in that you have to define two so-called in-application streams, a 
 STREAM (analagous to a database table) and a PUMP which is analagous to a continuous INSERT statement into the STREAM. The 
 windowing function is also a little unusual but basically allows you to do sliding or tumbling windows based on rowcounts and 
-time intervals. One final thing of note is that its possible for a KA application to import a file as reference data. For example 
-you could create a CSV file in an S3 bucket that mapped the sensorId in the schema definition to an actual physical location and 
-join the sreamimg data on the refernce data to bring out the location corresponding to the sensorId. For example:
+time intervals. 
 
+One final thing of note is that its possible for a KA application to aslo import a file as reference data. For example 
+you could create a CSV file in an S3 bucket that mapped the sensorId in the schema definition to an actual physical location and 
+inner join the streamimg data on the reference data to bring out the location corresponding to the sensorId. For example:
+
+sensorId,Location
 1, New York
 2, London,
 3, Hong Kong
 4, Singapore
 5, Edinburgh
 
-As a quick recap, to use Kiensis Analtyics and the data generator you need the following:
+To quickly recap, to use Kiensis Analtyics and the data generator you need to do the following:
 
 1) Create a Kinesis FireHose to send your data into 
 2) Create a cognito user
