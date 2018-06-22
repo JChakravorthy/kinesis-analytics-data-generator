@@ -6,10 +6,10 @@ slightly unusual in-application streams directives and windowing features of Kin
 
 Testing KA apps just got a whole lot easier with the introduction by Amazon of the Kinesis Data Generator (KDG)
 utility. This is not be confused with the Kinesis Producer Library which is an API specification where you have to write code
-to send data to Kinesis streams. The Kinesis Data Generator is a web based utility that allows you define a template for test data 
-in pretty much any format you like - structured like JSON or CSV  or completely unstructued or semi-structured like 
-Apache log data format - and KDG can potentially send 1000's of test records per second into your chosen Kinesis Stream or Fire Hose 
-in the format defined by your schema. 
+to send data to Kinesis streams. The Kinesis Data Generator is a web based utility that allows you to __easily__ define a 
+template for test data in pretty much any format you like - structured like JSON or CSV  or completely unstructued or 
+semi-structured like Apache log data format - and KDG can potentially send 1000's of test records per second into your 
+chosen Kinesis Stream or Fire Hose in the format defined by your schema. 
 
 As KDG is a web-based utility and password protected you need to set up an AWS coginto user and specify login and password 
 credentials before you can use it. Fortunately AWS make this really easy by using a pre-defined lambda and cloudformation template. 
