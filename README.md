@@ -61,12 +61,14 @@ One final thing of note is that its possible for a KA application to aslo import
 you could create a CSV file in an S3 bucket that mapped the sensorId in the schema definition to an actual physical location and 
 inner join the streamimg data on the reference data to bring out the location corresponding to the sensorId. For example:
 
+```
 sensorId,Location
 1, New York
 2, London,
 3, Hong Kong
 4, Singapore
 5, Edinburgh
+```
 
 To quickly recap, to use Kiensis Analtyics and the data generator you need to do the following:
 
