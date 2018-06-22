@@ -16,7 +16,7 @@ From here you just need to type in your cognito login credentials and you can st
 sending a ton of test data to your chosen stream. In my own case I chose to create the following schema to produce a set of 
 dummy temperature data:
 
-'''
+```
 {
     "sensorId": {{random.number(50)}},
     "currentTemperature": {{random.number(
@@ -29,7 +29,7 @@ dummy temperature data:
         ["OK","FAIL","WARN"]
     )}}"
 }
-'''
+```
 
 I connected this data to a Kinesis Firehose stream, set the throughput to 100 records per second and set an S3 bucket to store the 
 stream  as a back-up. I then checked that the data was coming through to the stream. After this you need to set up your KA streaming job.
