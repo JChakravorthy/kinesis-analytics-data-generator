@@ -5,19 +5,23 @@ Anyone who knows regular SQL from using a database like Oracle say will have no 
 slightly unusual windowing features of Kinesis Analytics (or KA as I'll call it from now on). 
 
 Testing KA apps just got a little bit easier with the introduction by Amazon recently of the Kinesis Data Generator 
-utility. This utility which is web-based allows you define a template of test data in pretty much any format you like and 
-send up to 1000's of test records per second into your chosen Kinesis Stream or Fire Hose. As it's web-based and password 
-protected you need to set up an AWS coginto user. AWS make this easy by using a pre-defined lambda and cloudformation template. 
+utility. This utility which is web-based allows you define a template for test data in pretty much any format you 
+like - structured like CSV for example or completely unstructued -and will send 1000's of test records per second into your 
+chosen Kinesis Stream or Fire Hose that correspond to the format defined in your schema. As it's web-based and password protected you need to set up an AWS coginto user. Fortunately AWS make this really easy by using a pre-defined lambda and cloudformation template. 
 
 You can set up a cognito user by following this link 
 https://awslabs.github.io/amazon-kinesis-data-generator/web/help.html#configAccount
 
 Once you've uploaded a cognito JSON set-up file you will be presented with a screen where you only need to input a stack name and 
 your chosen username and password. You can choose all defaults and click NEXT to the rest of the screens/prompts and once the 
-process has been completed you will be presented with a URL link which will take you to the Kinesis Data Generator web page. 
+process has been completed you will be presented with a URL link which will take you to the Kinesis Data Generator web page itself. 
 From here you just need to type in your cognito login credentials and you can start to create a data feed schema and start 
-sending a ton of test data to your chosen stream. In my own case I chose to create the following schema to produce a set of 
-dummy temperature data:
+sending a ton of test data to your chosen Kinesis stream. The schema defintion can range from the very simple to  more complex 
+examples like apache log entries. You can even specify a schema where some data points can only take limited or randoam values.
+one shown belowbelow whereby you can specify certain limited or random values. In my own case I chose to create the following 
+schema to produce a set of dummy temperature data. As you can see the sensorId is a random value between 1 and 50, the temperature 
+must be between 10 and 150 and the status field can only take one of three values.
+
 
 ```
 {
@@ -36,20 +40,31 @@ dummy temperature data:
 
 I connected this data to a Kinesis Firehose stream, set the throughput to 100 records per second and set an S3 bucket to store the 
 stream  output as a back-up ( you can send the output to AWS ElasticSearch, Splunk or Redshift too). I then checked that the data 
-was coming through to the stream. After this you need to set up your KA streaming job. You give the stream a  name, and a source 
-(this is the Firehose stream you have already set up and is receiving your dummy sensor data). After that you choose the Reatime 
-Analytic TAB and ensure that source data is streaming into KA. If it is, you then move on to defining 
-some KA SQL to run against your data input and optionally a source such as S3 to store the results of your analytics. My SQL was 
-really simple, just a sliding windowing function that displays the average temperature per sensorID over the preceding moving 10 
-second window.
+was coming through to the stream. After this you need to set up your KA streaming job. You give the stream a name, and a source 
+(the Firehose stream that is receiving your dummy test data). After that you choose the Reatime Analytic TAB and ensure that the 
+source data is streaming into KA. KA will infer the data types of the fields from its stream input. If all is OK is, you then move 
+on to defining some KA SQL to run against your data input and optionally a source such as S3 to store the results of your analytics. 
+My SQL was really simple, just a sliding windowing function that displays the average temperature per sensorID over the preceding 
+moving 10 second window. The SQL you create  is a little unusual in that you have to define two so-called in-application streams, a 
+STREAM (analagous to a database table) and a PUMP which is analagous to a continuous INSERT statement into the STREAM. The 
+windowing function is also a little unusual but basically allows you to do sliding or tumbling windows based on rowcounts and 
+time intervals. One final thing of note is that its possible for a KA application to import a file as reference data. For example 
+you could create a CSV file in an S3 bucket that mapped the sensorId in the schema definition to an actual physical location and 
+join the sreamimg data on the refernce data to bring out the location corresponding to the sensorId. For example:
 
-As a recap you need to:
+1, New York
+2, London,
+3, Hong Kong
+4, Singapore
+5, Edinburgh
+
+As a quick recap, to use Kiensis Analtyics and the data generator you need the following:
 
 1) Create a Kinesis FireHose to send your data into 
 2) Create a cognito user
-3) Create a dummy set of data using the Kinesis Data Generator to send data to your FireHose
+3) Login to the Kinesis Data Generator webpage, create a data schema and start sending data to your chosen Kinesis Firehose
 4) Create a Kinesis Analytics job, set the source as your FireHose and set up a SQL to analyze your data
 
 
-KA rocks!
+Kinesis rocks!
 
