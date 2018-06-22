@@ -36,8 +36,9 @@ stream  output as a back-up ( you can send the output to AWS ElasticSearch, Splu
 was coming through to the stream. After this you need to set up your KA streaming job. You give the stream a  name, and a source 
 (this is the Firehose stream you have already set up and is receiving your dummy sensor data). After that you choose the Reatime 
 Analytic TAB and ensure that source data is streaming into KA. If it is, you then move on to defining 
-some KA SQL to run against your data input. My SQL was really simple, just a sliding windowing function that displays the average 
-temperature per sensorID over the preceding moving 10 second window.
+some KA SQL to run against your data input and optionally a source such as S3 to store the results of your analytics. My SQL was 
+really simple, just a sliding windowing function that displays the average temperature per sensorID over the preceding moving 10 
+second window.
 
 KA rocks!
 
