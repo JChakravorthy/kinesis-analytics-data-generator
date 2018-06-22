@@ -40,15 +40,16 @@ status field can only take one of three values.
 
 I connected this data to a Kinesis Firehose stream, set the throughput to 100 records per second and set an S3 bucket to store the 
 stream  output as a back-up ( you can send the output to AWS ElasticSearch, Splunk or Redshift too). I then checked that the data 
-was coming through to the stream. After this you need to set up your KA streaming job. You give the stream a name, and a source 
+was coming through to the stream. After this you need to set up your KA streaming job. You give the stream a name, and an source 
 (the Firehose stream that is receiving your dummy test data). After that you choose the Reatime Analytic TAB and ensure that the 
-source data is streaming into KA. KA will infer the data types of the fields from its stream input. If all is OK is, you then move 
-on to defining some KA SQL to run against your data input and optionally a source such as S3 to store the results of your analytics. 
-My SQL was really simple, just a sliding windowing function that displays the average temperature per sensorID over the preceding 
-moving 10 second window. The SQL you create  is a little unusual in that you have to define two so-called in-application streams, a 
-STREAM (analagous to a database table) and a PUMP which is analagous to a continuous INSERT statement into the STREAM. The 
-windowing function is also a little unusual but basically allows you to do sliding or tumbling windows based on rowcounts and 
-time intervals. 
+source data is streaming into KA. KA will infer the data types of the fields from its stream input. If all is OK, you then move 
+on to defining the SQL that you want to run against your input data. My SQL was really simple, just a sliding windowing function 
+that displays the average temperature per sensorID over the preceding moving 10 second window. 
+
+KA SQL is based on the 2008 SQL standard but some parts of it are a little unusual in that you have to define two 
+so-called in-application streams at the top of your SQL, a STREAM (analagous to a database table) and a PUMP which is analagous 
+to a continuous INSERT statement into the STREAM. For aggregations you have to use windowing functions which are also a little 
+unusual but basically these allow you to do sliding or tumbling windows based on rowcounts and/or time intervals. 
 
 One final thing of note is that its possible for a KA application to aslo import a file as reference data. For example 
 you could create a CSV file in an S3 bucket that mapped the sensorId in the schema definition to an actual physical location and 
