@@ -15,6 +15,7 @@ As KDG is a web-based utility and password protected you need to set up an AWS c
 credentials befire you can use it. Fortunately AWS make this really easy by using a pre-defined lambda and cloudformation template. 
 
 You can set up a cognito user by following this link 
+
 <https://awslabs.github.io/amazon-kinesis-data-generator/web/help.html#configAccount>
 
 Once you've uploaded a cognito JSON set-up file you will be presented with a screen where you only need to input a stack name and 
