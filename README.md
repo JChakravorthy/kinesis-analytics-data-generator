@@ -32,9 +32,10 @@ dummy temperature data:
 ```
 
 I connected this data to a Kinesis Firehose stream, set the throughput to 100 records per second and set an S3 bucket to store the 
-stream  as a back-up. I then checked that the data was coming through to the stream. After this you need to set up your KA streaming job.
-You give the stream a  name, and a source (this is the Firehose stream you have already set up and is receiving your dummy sensor data).
-After that you choose the Reatime Analytic TAB and ensure that source data is streaming into KA. If it is you then move on to defining 
+stream  output as a back-up ( you can send the output to AWS ElasticSearch, Splunk or Redshift too). I then checked that the data 
+was coming through to the stream. After this you need to set up your KA streaming job. You give the stream a  name, and a source 
+(this is the Firehose stream you have already set up and is receiving your dummy sensor data). After that you choose the Reatime 
+Analytic TAB and ensure that source data is streaming into KA. If it is, you then move on to defining 
 some KA SQL to run against your data input. My SQL was really simple, just a sliding windowing function that displays the average 
 temperature per sensorID over the preceding moving 10 second window.
 
