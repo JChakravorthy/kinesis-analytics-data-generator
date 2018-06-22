@@ -2,11 +2,14 @@
 
 Kinesis analytics is a way to analyze near real-time streams of data in a very SQL-like way.
 Anyone who knows regular SQL from using a database like Oracle say will have no trouble getting to grips with the 
-slightly unusual windowing features of Kinesis Analytics (or KA as I'll call it from now on). Testing KA apps just got a little bit easier
-with the intoduction by Amazon recently of the Kinesis Data Generator utility. This utility which is web-based allows you define a 
-template of test data in pretty much any format you like and send up to 1000's of records per second into your chosen Kinesis Stream or 
-Fire Hose. As it's web-based and password protected you need to set up an AWS coginto user. AWS make this easy by using a pre-defined 
-lambda and cloudformation template. You can set up a cognito user by following this link 
+slightly unusual windowing features of Kinesis Analytics (or KA as I'll call it from now on). 
+
+Testing KA apps just got a little bit easier with the introduction by Amazon recently of the Kinesis Data Generator 
+utility. This utility which is web-based allows you define a template of test data in pretty much any format you like and 
+send up to 1000's of test records per second into your chosen Kinesis Stream or Fire Hose. As it's web-based and password 
+protected you need to set up an AWS coginto user. AWS make this easy by using a pre-defined lambda and cloudformation template. 
+
+You can set up a cognito user by following this link 
 https://awslabs.github.io/amazon-kinesis-data-generator/web/help.html#configAccount
 
 Once you've uploaded a cognito JSON set-up file you will be presented with a screen where you only need to input a stack name and 
