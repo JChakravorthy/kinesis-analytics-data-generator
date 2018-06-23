@@ -9,7 +9,8 @@ utility. This is not be confused with the Kinesis Producer Library which is an A
 to send data to Kinesis streams. The Kinesis Data Generator is a web based utility that allows you to __easily__ define a 
 template for test data in pretty much any format you like - structured like JSON or CSV  or completely unstructued or 
 semi-structured like Apache log data format - and KDG can potentially send 1000's of test records per second into your 
-chosen Kinesis Stream or Fire Hose in the format defined by your schema. 
+chosen Kinesis Stream or Fire Hose in the format defined by your schema. In testing, Amazon claims speeds of up to 
+80,000 records per second are possible but the throughput depends on the complexity of the schema and your computer's spec.
 
 As KDG is a web-based utility and password protected you need to set up an AWS coginto user and specify login and password 
 credentials before you can use it. Fortunately AWS make this really easy by using a pre-defined lambda and cloudformation template. 
