@@ -58,7 +58,7 @@ so-called in-application streams at the top of your SQL, a STREAM (analagous to 
 to a continuous INSERT statement into the STREAM. For aggregations you have to use windowing functions which are also a little 
 unusual but basically these allow you to do sliding or tumbling windows based on rowcounts and/or time intervals. 
 
-One final thing of note is that its possible for a KA application to aslo import a file as reference data. For example 
+One final thing of note is that its possible for a KA application to also import a file as reference data. For example 
 you could create a CSV file in an S3 bucket that mapped the sensorId in the schema definition to an actual physical location and 
 inner join the streamimg data on the reference data to bring out the location corresponding to the sensorId. For example:
 
